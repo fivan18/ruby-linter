@@ -1,9 +1,9 @@
 RSpec.describe Code do
-  let(:code) { Code.new('./test_code/test_code.rb') }
+  let(:code) { Code.new('test_code.rb') }
 
-  describe '#' do
-    it '' do
-      expect(dashboard.add_move('1', '✘')).to eql(true)
+  describe '#bad_identifiers' do
+    it 'returns indetifiers that are not ascii-only' do
+      expect(code.bad_identifiers).to eql([['заплата', [5, 2]]])
     end
   end
 end
