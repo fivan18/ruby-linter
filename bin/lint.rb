@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'tty-prompt'
+require 'yaml'
 require_relative '../lib/manager.rb'
 
 def display(symbol, no_valid)
@@ -25,6 +26,9 @@ VALIDATIONS = {
 
 path_file = Dir.pwd + '/' + ARGV[0]
 manager = Manager.new(path_file)
+yml = YAML.load(File.read(Dir.pwd + '/test_code.yml'))
 
 display(:validation1, manager.with_no_conventions(:validation1))
+
+pp yml
 
