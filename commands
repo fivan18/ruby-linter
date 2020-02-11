@@ -3,3 +3,12 @@
  source ~/.bashrc
 
  gem install tty-prompt
+
+
+---
+  :variables:
+    - :ascii
+    - :snakecase
+  :methods:
+    - :ascii
+    - :snakecase

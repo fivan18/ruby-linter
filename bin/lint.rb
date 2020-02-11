@@ -3,7 +3,8 @@
 
 require 'tty-prompt'
 require 'yaml'
-require_relative '../lib/manager.rb'
+
+require_relative '../lib/validator.rb'
 
 def display(symbol, no_valid)
   prompt = TTY::Prompt.new
@@ -18,17 +19,24 @@ def display(symbol, no_valid)
   end
 end
 
-SYMBOL_VALIDATIONS = [:validation1]
+def config(path_file)
+  config = CONFIG
+  if File.exist?(path_file + 'config.yml')
+    config = YAML.load(File.read(path_file + 'config.yml'))
+  end
+  config
+end
 
+CONFIG = { :variables => [:ascii, :snakecase], :methods => [:ascii, :snakecase] }
 VALIDATIONS = {
   :validation1 => 'no-ascii identifiers'
 }
 
-path_file = Dir.pwd + '/' + ARGV[0]
-manager = Manager.new(path_file)
-yml = YAML.load(File.read(Dir.pwd + '/test_code.yml'))
 
-display(:validation1, manager.with_no_conventions(:validation1))
+path_file = Dir.pwd + '/'
 
-pp yml
+puts config(path_file)
+
+
+
 
