@@ -27,7 +27,7 @@ def config(path_file)
   config
 end
 
-CONFIG = { :variables => [:ascii, :snakecase], :methods => [:ascii, :snakecase] }
+CONFIG = { :variables => [:ascii] }
 VALIDATIONS = {
   :ascii => 'no-ascii identifiers',
   :snakecase => 'no-snakecase identifiers'
@@ -36,7 +36,22 @@ VALIDATIONS = {
 
 path_file = Dir.pwd + '/'
 
-display(:variables, :ascii, [['заплата', [5, 2]]])
+if !ARGV.empty? &&  File.exist?(path_file + ARGV[0])
+  validator = Validator.new(path_file + ARGV[0])
+  to_validate = config(path_file)
+
+  to_validate.each do |element, validations|
+    validations.each do |validation|
+      no_valid = validator.validate(element, validation)
+      display(element, validation, no_valid)
+    end
+  end
+else
+  prompt = TTY::Prompt.new
+  prompt.error('The file doesn\'t exist')
+end
+
+
 
 
 

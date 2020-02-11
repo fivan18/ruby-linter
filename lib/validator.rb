@@ -7,8 +7,8 @@ class Validator
     @code = Code.new(path_file)
   end
 
-  def validate(what, validation)
-    elements = @code.send(what)
+  def validate(element, validation)
+    elements = @code.send(element)
 
     self.send(validation, elements)
   end
