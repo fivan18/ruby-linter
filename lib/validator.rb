@@ -1,8 +1,6 @@
 require_relative 'code.rb'
 
 class Validator
-  attr_reader :code
-
   def initialize(path_file)
     @code = Code.new(path_file)
   end
