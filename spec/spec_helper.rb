@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../lib/code.rb'
+require_relative '../lib/validator.rb'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
