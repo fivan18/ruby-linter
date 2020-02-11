@@ -3,9 +3,8 @@ require 'ripper'
 class Code
   attr_reader :file_to_string, :symbolic_expression_tree
   
-  def initialize(file)
-    puts Dir.pwd
-    @file_to_string = File.read(Dir.pwd + '/spec/test_code/' + file)
+  def initialize(path_file)
+    @file_to_string = File.read(path_file)
     @symbolic_expression_tree = Ripper.sexp(@file_to_string)
   end
 
