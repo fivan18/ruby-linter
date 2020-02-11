@@ -6,13 +6,13 @@ require 'yaml'
 
 require_relative '../lib/validator.rb'
 
-def display(symbol, no_valid)
+def display(element, validation, no_valid)
   prompt = TTY::Prompt.new
 
   if no_valid.empty?
-    prompt.ok(VALIDATIONS[symbol] + '=========> No offences')
+    prompt.ok("#{element} =========> No offences")
   else
-    prompt.error(VALIDATIONS[symbol])
+    prompt.error("#{element}, #{VALIDATIONS[validation]}")
     no_valid.each do |item|
       prompt.warn("      #{item[0]} line #{item[1][0]} column #{item[1][1]}")
     end
@@ -29,13 +29,14 @@ end
 
 CONFIG = { :variables => [:ascii, :snakecase], :methods => [:ascii, :snakecase] }
 VALIDATIONS = {
-  :validation1 => 'no-ascii identifiers'
+  :ascii => 'no-ascii identifiers',
+  :snakecase => 'no-snakecase identifiers'
 }
 
 
 path_file = Dir.pwd + '/'
 
-puts config(path_file)
+display(:variables, :ascii, [['заплата', [5, 2]]])
 
 
 
