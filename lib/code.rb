@@ -13,19 +13,15 @@ class Code
   end
 
   def symbols
-    # [:symbol_literal, [:symbol, [:@ident, "assign", [12, 10]]]]
-    symbols_literal = []
-    find(:symbol_literal, symbols_literal)
+    # [:symbol_literal, 
+    #   [:symbol, [:@ident, "assign", [12, 10]]]]
+    identifiers(:symbol_literal)
+  end
 
-    symbols = []
-    symbols_literal.each do |literal|
-      # [:symbol, [:@ident, "assign", [12, 10]]]
-      symbol = literal[1]
-
-      symbol_to_push = [symbol[1][1], symbol[1][2]]
-      symbols.push(symbol_to_push)
-    end
-    symbols
+  def classes
+    # [:class,
+    #   [:const_ref, [:@const, "TestScript", [3, 6]]]
+    identifiers(:class)
   end
 
   def methods
@@ -40,23 +36,6 @@ class Code
       methods.push(method)
     end
     methods
-  end
-
-  def classes
-    # [:class,
-    #   [:const_ref, [:@const, "TestScript", [3, 6]]]
-    classes = []
-    find(:class, classes)
-
-    classes_to_return = []
-    classes.each do |class1|
-      # [:const_ref, [:@const, "TestScript", [3, 6]]]
-      const_ref = class1[1]
-
-      class_to_push = [const_ref[1][1], const_ref[1][2]]
-      classes_to_return.push(class_to_push)
-    end
-    classes_to_return
   end
 
   private
@@ -85,7 +64,7 @@ class Code
       field = item[1]
 
       identifier = [field[1][1], field[1][2]]
-      identifiers.push(identifiers)
+      identifiers.push(identifier)
     end
     identifiers
   end
