@@ -7,19 +7,9 @@ class Code
   end
 
   def variables
-    # [:assign, [:var_field, [:@ident, "заплата", [5, 2]]], [:@int, "1_000", [5, 19]]]
-    assignations = []
-    find(:assign, assignations)
-
-    variables = []
-    assignations.each do |assign|
-      # [:var_field, [:@ident, "заплата", [5, 2]]]
-      var_field = assign[1]
-
-      variable = [var_field[1][1], var_field[1][2]]
-      variables.push(variable)
-    end
-    variables
+    # [:assign, 
+    #   [:var_field, [:@ident, "заплата", [5, 2]]], [:@int, "1_000", [5, 19]]]
+    identifiers(:assign)
   end
 
   def symbols
@@ -81,5 +71,22 @@ class Code
         find(sym, matched_arrays, item)
       end
     end
+  end
+  
+  def identifiers(symbol)
+    # [:symbol, 
+    #   [:field, [:@ident, "заплата", [5, 2]]]
+    array = []
+    find(symbol, array)
+
+    identifiers = []
+    array.each do |item|
+      # [:field, [:@ident, "заплата", [5, 2]]]
+      field = item[1]
+
+      identifier = [field[1][1], field[1][2]]
+      identifiers.push(identifiers)
+    end
+    identifiers
   end
 end
