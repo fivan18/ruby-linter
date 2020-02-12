@@ -31,7 +31,7 @@ CONFIG = {
   :classes => [:ascii, :camelcase],
   :variables => [:ascii, :snakecase],
   :methods => [:ascii, :snakecase],
-  :symbols=>[:ascii, :snakecase]
+  :symbols => [:ascii, :snakecase]
 }
 VALIDATIONS = {
   :ascii => 'non ascii identifiers',
@@ -39,10 +39,9 @@ VALIDATIONS = {
   :camelcase => 'non camelcase identifiers'
 }
 
-
 path_file = Dir.pwd + '/'
 prompt = TTY::Prompt.new
-if !ARGV.empty? &&  File.exist?(path_file + ARGV[0])
+if !ARGV.empty? && File.exist?(path_file + ARGV[0])
   validator = Validator.new(path_file + ARGV[0])
   to_validate = config(path_file)
 
@@ -56,9 +55,3 @@ if !ARGV.empty? &&  File.exist?(path_file + ARGV[0])
 else
   prompt.error('The file doesn\'t exist')
 end
-
-
-
-
-
-
