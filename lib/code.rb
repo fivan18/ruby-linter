@@ -42,6 +42,20 @@ class Code
   end
 
   def classes
+    # [:class,
+    #   [:const_ref, [:@const, "TestScript", [3, 6]]]
+    classes = []
+    find(:class, classes)
+
+    classes_to_return = []
+    classes.each do |class1|
+      # [:const_ref, [:@const, "TestScript", [3, 6]]]
+      const_ref = class1[1]
+
+      class_to_push = [const_ref[1][1], const_ref[1][2]]
+      classes_to_return.push(class_to_push)
+    end
+    classes_to_return
   end
 
   private

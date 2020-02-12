@@ -8,8 +8,13 @@ RSpec.describe Code do
   end
 
   describe '#symbols' do
-  it 'returns all names of symbols' do
-    expect(code.symbols).to eql([['SomeSymbol', [11, 3]], ['someSymbol', [12, 3]]])
+    it 'returns all names of symbols' do
+      expect(code.symbols).to eql([['SomeSymbol', [11, 3]], ['someSymbol', [12, 3]]])
+    end
   end
-end
+  describe '#classes' do
+    it 'returns all names of classes' do
+      expect(code.classes).to eql([['TestScript', [3, 6]]])
+    end
+  end
 end
