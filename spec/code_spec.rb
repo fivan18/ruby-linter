@@ -9,7 +9,7 @@ RSpec.describe Code do
 
   describe '#symbols' do
     it 'returns all names of symbols' do
-      expect(code.symbols).to eql([['SomeSymbol', [11, 3]], ['someSymbol', [12, 3]]])
+      expect(code.symbols).to eql([['SomeSymbol', [10, 3]], ['someSymbol', [11, 3]]])
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe Code do
 
   describe '#methods' do
     it 'returns all names of methos' do
-      expect(code.methods).to eql([['a_Method', [14, 6]], ['anotherMethod', [18, 6]]])
+      expect(code.methods).to eql([['a_Method', [13, 6]], ['anotherMethod', [17, 6]]])
     end
   end
 end
