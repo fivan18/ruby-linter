@@ -23,7 +23,19 @@ class Code
   end
 
   def symbols
+    # [:symbol_literal, [:symbol, [:@ident, "assign", [12, 10]]]]
+    symbols_literal = []
+    find(:symbol_literal, symbols_literal)
 
+    symbols = []
+    symbols_literal.each do |literal|
+      # [:symbol, [:@ident, "assign", [12, 10]]]
+      symbol = literal[1]
+
+      symbol_to_push = [symbol[1][1], symbol[1][2]]
+      symbols.push(symbol_to_push)
+    end
+    symbols
   end
 
   def methods
