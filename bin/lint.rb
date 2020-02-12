@@ -27,10 +27,16 @@ def config(path_file)
   config
 end
 
-CONFIG = { :variables => [:ascii] }
+CONFIG = {
+  :classes => [:ascii, :camelcase],
+  :variables => [:ascii, :snakecase],
+  :methods => [:ascii, :snakecase],
+  :symbols=>[:ascii, :snakecase]
+}
 VALIDATIONS = {
-  :ascii => 'no-ascii identifiers',
-  :snakecase => 'no-snakecase identifiers'
+  :ascii => 'non ascii identifiers',
+  :snakecase => 'non snakecase identifiers',
+  :camelcase => 'non camelcase identifiers'
 }
 
 
