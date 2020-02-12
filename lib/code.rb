@@ -1,19 +1,19 @@
 require 'ripper'
 
-class Code 
+class Code
   def initialize(path_file)
     @file_to_string = File.read(path_file)
     @symbolic_expression_tree = Ripper.sexp(@file_to_string)
   end
 
   def variables
-    # [:assign, 
-    #   [:var_field, [:@ident, "заплата", [5, 2]]], [:@int, "1_000", [5, 19]]]
+    # [:assign,
+    #   [:var_field, [:@ident, "lala", [5, 2]]], [:@int, "1_000", [5, 19]]]
     identifiers(:assign)
   end
 
   def symbols
-    # [:symbol_literal, 
+    # [:symbol_literal,
     #   [:symbol, [:@ident, "assign", [12, 10]]]]
     identifiers(:symbol_literal)
   end
@@ -39,6 +39,7 @@ class Code
   end
 
   private
+
   def find(sym, matched_arrays, array = @symbolic_expression_tree)
     if array[0] == sym
       matched_arrays.push(array)
@@ -46,26 +47,21 @@ class Code
     end
 
     array.each do |item|
-      if item.is_a?(Array)
-        find(sym, matched_arrays, item)
-      end
+      find(sym, matched_arrays, item) if item.is_a?(Array)
     end
   end
-  
+
   def identifiers(symbol)
-    # [:symbol, 
-    #   [:field, [:@ident, "заплата", [5, 2]]]
+    # [:symbol,
+    #   [:field, [:@ident, "lala", [5, 2]]]
     array = []
     find(symbol, array)
 
     identifiers = []
     array.each do |item|
-      if item[1][0] == :aref_field
-        field = item[1][1]
-      else
-        # [:field, [:@ident, "заплата", [5, 2]]]
-        field = item[1]
-      end
+      # [:field, [:@ident, "lala", [5, 2]]]
+      field = item[1]
+      field = item[1][1] if item[1][0] == :aref_field
 
       identifier = [field[1][1], field[1][2]]
       identifiers.push(identifier)

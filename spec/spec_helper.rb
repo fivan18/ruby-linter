@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative '../lib/code.rb'
 require_relative '../lib/validator.rb'
 

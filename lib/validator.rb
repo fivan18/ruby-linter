@@ -8,30 +8,35 @@ class Validator
   def validate(element, validation)
     elements = @code.send(element)
 
-    self.send(validation, elements)
+    send(validation, elements)
   end
 
   protected
+
   def ascii(elements)
-    elements.select { |element| !element[0].ascii_only? }
+    elements.reject { |element| element[0].ascii_only? }
   end
 
   def snakecase(elements)
-    elements.select { |element| element[0] != to_snakecase(element[0]) }
+    elements.reject do |element|
+      element[0] == to_snakecase(element[0]) || element[0] == to_snakecase(element[0]).upcase
+    end
   end
 
   def camelcase(elements)
-    elements.select { |element| element[0] != to_camelcase(to_snakecase(element[0])) }
+    elements.reject { |element| element[0] == to_camelcase(to_snakecase(element[0])) }
   end
 
   private
+
   def to_snakecase(string)
-    string.gsub(/::/, '/').
-    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-    gsub(/([a-z\d])([A-Z])/,'\1_\2').
-    tr("-", "_").
-    downcase
+    string.gsub(/::/, '/')
+      .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+      .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+      .tr('-', '_')
+      .downcase
   end
+
   def to_camelcase(string)
     string.split('_').collect(&:capitalize).join
   end
