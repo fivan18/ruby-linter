@@ -60,8 +60,12 @@ class Code
 
     identifiers = []
     array.each do |item|
-      # [:field, [:@ident, "заплата", [5, 2]]]
-      field = item[1]
+      if item[1][0] == :aref_field
+        field = item[1][1]
+      else
+        # [:field, [:@ident, "заплата", [5, 2]]]
+        field = item[1]
+      end
 
       identifier = [field[1][1], field[1][2]]
       identifiers.push(identifier)
