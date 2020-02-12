@@ -18,7 +18,9 @@ class Validator
   end
 
   def snakecase(elements)
-    elements.reject { |element| element[0] == to_snakecase(element[0]) }
+    elements.reject do |element|
+      element[0] == to_snakecase(element[0]) || element[0] == to_snakecase(element[0]).upcase
+    end
   end
 
   def camelcase(elements)
