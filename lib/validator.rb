@@ -16,6 +16,14 @@ class Validator
     elements.select { |element| !element[0].ascii_only? }
   end
 
+  def snakecase(elements)
+    elements.select { |element| element[0] != to_snakecase(element[0]) }
+  end
+
+  def camelcase(elements)
+    elements.select { |element| element[0] != to_camelcase(to_snakecase(element[0])) }
+  end
+
   private
   def to_snakecase(string)
     string.gsub(/::/, '/').
@@ -23,5 +31,8 @@ class Validator
     gsub(/([a-z\d])([A-Z])/,'\1_\2').
     tr("-", "_").
     downcase
+  end
+  def to_camelcase(string)
+    string.split('_').collect(&:capitalize).join
   end
 end
