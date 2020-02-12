@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'tty-prompt'
-require 'yaml'
+require 'psych'
 
 require_relative '../lib/validator.rb'
 
@@ -20,7 +20,7 @@ end
 
 def config(path_file)
   config = CONFIG
-  config = YAML.safe_load(File.read(path_file + 'config.yml')) if File.exist?(path_file + 'config.yml')
+  config = Psych.load(File.read(path_file + 'config.yml')) if File.exist?(path_file + 'config.yml')
   config
 end
 
