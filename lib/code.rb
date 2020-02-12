@@ -39,6 +39,17 @@ class Code
   end
 
   def methods
+    # [:def,
+    #   [:@ident, "symbols", [25, 6]
+    definitions = []
+    find(:def, definitions)
+
+    methods = []
+    definitions.each do |definition|
+      method = [definition[1][1], definition[1][2]]
+      methods.push(method)
+    end
+    methods
   end
 
   def classes
