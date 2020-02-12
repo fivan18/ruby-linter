@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
 require 'tty-prompt'
 require 'yaml'
@@ -21,23 +20,21 @@ end
 
 def config(path_file)
   config = CONFIG
-  if File.exist?(path_file + 'config.yml')
-    config = YAML.load(File.read(path_file + 'config.yml'))
-  end
+  config = YAML.safe_load(File.read(path_file + 'config.yml')) if File.exist?(path_file + 'config.yml')
   config
 end
 
 CONFIG = {
-  :classes => [:ascii, :camelcase],
-  :variables => [:ascii, :snakecase],
-  :methods => [:ascii, :snakecase],
-  :symbols => [:ascii, :snakecase]
-}
+  classes: %i[ascii camelcase],
+  variables: %i[ascii snakecase],
+  methods: %i[ascii snakecase],
+  symbols: %i[ascii snakecase]
+}.freeze
 VALIDATIONS = {
-  :ascii => 'non ascii identifiers',
-  :snakecase => 'non snakecase identifiers',
-  :camelcase => 'non camelcase identifiers'
-}
+  ascii: 'non ascii identifiers',
+  snakecase: 'non snakecase identifiers',
+  camelcase: 'non camelcase identifiers'
+}.freeze
 
 path_file = Dir.pwd + '/'
 prompt = TTY::Prompt.new
