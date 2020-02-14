@@ -1,8 +1,6 @@
 require 'ripper'
 
 class Code
-  attr_reader :symbolic_expression_tree
-
   def initialize(path_file)
     @file_to_string = File.read(path_file)
     @symbolic_expression_tree = Ripper.sexp(@file_to_string)
@@ -49,6 +47,10 @@ class Code
       methods.push(method)
     end
     methods
+  end
+
+  def tree_nil?
+    @symbolic_expression_tree.nil?
   end
 
   private

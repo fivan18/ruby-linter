@@ -11,6 +11,10 @@ class Validator
     send(validation, elements)
   end
 
+  def code_nil?
+    @code.tree_nil?
+  end
+
   protected
 
   def ascii(elements)

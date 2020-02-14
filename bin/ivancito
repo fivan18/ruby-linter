@@ -43,6 +43,8 @@ if !ARGV.empty? && File.exist?(path_file + ARGV[0])
   to_validate = config(path_file)
 
   to_validate.each do |element, validations|
+    next if validator.code_nil? && element != :classes
+
     prompt.say(element.to_s)
     validations.each do |validation|
       no_valid = validator.validate(element, validation)
