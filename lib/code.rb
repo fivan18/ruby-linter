@@ -1,32 +1,42 @@
 require 'ripper'
 
 class Code
+  attr_reader :symbolic_expression_tree
+
   def initialize(path_file)
     @file_to_string = File.read(path_file)
     @symbolic_expression_tree = Ripper.sexp(@file_to_string)
   end
 
   def variables
-    # [:assign,
-    #   [:var_field, [:@ident, "lala", [5, 2]]], [:@int, "1_000", [5, 19]]]
+    return [] unless @symbolic_expression_tree
     identifiers(:assign)
   end
 
   def symbols
-    # [:symbol_literal,
-    #   [:symbol, [:@ident, "assign", [12, 10]]]]
+    return [] unless @symbolic_expression_tree
     identifiers(:symbol_literal)
   end
 
   def classes
-    # [:class,
-    #   [:const_ref, [:@const, "TestScript", [3, 6]]]
-    identifiers(:class)
+    name_classes = []
+    unless  @symbolic_expression_tree
+      tokenized_code = Ripper.lex(@file_to_string)
+      indexes = tokenized_code.each_index.select do |i| 
+        tokenized_code[i][1] == :on_kw && tokenized_code[i][2] == 'class'
+      end
+
+      name_classes = indexes.map do |i| 
+        [tokenized_code[i + 2][2], tokenized_code[i + 2][0]]
+      end
+    else
+      name_classes = identifiers(:class)
+    end
+    name_classes
   end
 
   def methods
-    # [:def,
-    #   [:@ident, "symbols", [25, 6]
+    return [] unless @symbolic_expression_tree
     definitions = []
     find(:def, definitions)
 
