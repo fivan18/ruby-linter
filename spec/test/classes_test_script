@@ -1,0 +1,20 @@
+require 'ripper'
+
+# bad classes names
+class a_class
+  def initialize
+  end
+end
+
+class anotherClass
+  def initialize
+    variable = 0
+  end
+end
+
+# god class name
+class RigthNameCLass
+  def initialize
+    variable = []
+  end
+end

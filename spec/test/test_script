@@ -1,17 +1,27 @@
 class TestScript
-  # bad - identifier using non-ascii characters
-  заплата = 1_000
+  # non-ascii characters, non snakecase identifier
+  attr_reader :baп_symbol, :BabSymbol
+  attr_writer :good_symbol
 
-  # good
-  salary = 1_000
+  CONSTANT = [1, 2, 3].freeze
 
-  :SomeSymbol
-  :someSymbol
-
+  # non snakecase identifier
   def a_Method
     nil
   end
 
+  # non snakecase identifier
   def anotherMethod
+    good_variable = { :BADSYMBOL => 'bad'}
+  end
+
+  def god_method
+    # non-ascii characters
+    заплата = 1_000
+    salary = 1_000
+
+    good_variable = CONSTANT.map do |number|
+      number * 2
+    end
   end
 end
