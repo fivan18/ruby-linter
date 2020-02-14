@@ -17,7 +17,11 @@
 
 ### prerequisites
 
-Be sure to install [TTY prompt component](https://github.com/piotrmurach/tty-prompt)
+Be sure to run `bundle` to install [TTY prompt component](https://github.com/piotrmurach/tty-prompt):
+
+    $ bundle
+
+Or install it yourself as:
 
     $ gem install tty-prompt
 
