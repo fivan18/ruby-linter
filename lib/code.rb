@@ -10,23 +10,25 @@ class Code
 
   def variables
     return [] unless @symbolic_expression_tree
+
     identifiers(:assign)
   end
 
   def symbols
     return [] unless @symbolic_expression_tree
+
     identifiers(:symbol_literal)
   end
 
   def classes
     name_classes = []
-    unless  @symbolic_expression_tree
+    if @symbolic_expression_tree.nil?
       tokenized_code = Ripper.lex(@file_to_string)
-      indexes = tokenized_code.each_index.select do |i| 
+      indexes = tokenized_code.each_index.select do |i|
         tokenized_code[i][1] == :on_kw && tokenized_code[i][2] == 'class'
       end
 
-      name_classes = indexes.map do |i| 
+      name_classes = indexes.map do |i|
         [tokenized_code[i + 2][2], tokenized_code[i + 2][0]]
       end
     else
@@ -37,6 +39,7 @@ class Code
 
   def methods
     return [] unless @symbolic_expression_tree
+
     definitions = []
     find(:def, definitions)
 
