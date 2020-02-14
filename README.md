@@ -3,9 +3,9 @@
 </p>
 
 # Ivancito Linter
-> A simple linter tool to verify [Naming Conventions](https://rubystyle.guide/#naming-conventions) in ruby code.
+> A simple linter tool to verify [Naming Conventions](https://rubystyle.guide/#naming-conventions) in ruby code
 
-**Ivancito Linter** provides a simple way to verify ruby scripts using a ***config.yml*** file for the configuration.
+**Ivancito Linter** provides a simple way to verify ruby scripts using a ***config.yml*** file for the configuration
 
 
 ## Built With
@@ -27,11 +27,11 @@ Or install it yourself as:
 
 ### install
 
-Get a local copy of the [linter tool](https://github.com/fivan18/ruby-linter) and colocate it wherever you want in your directory structure
+Get a [project's](https://github.com/fivan18/ruby-linter) local copy and place it wherever you want in your directory structure
 
     $ git clone https://github.com/fivan18/ruby-linter.git
 
-Go inside the root directory of the tool and run the next command
+Use the terminal and go inside the [project's](https://github.com/fivan18/ruby-linter) root directory and run the next command
 
     $ echo "export PATH=$(pwd)/bin:$PATH" >> ~/.bashrc
 
@@ -43,9 +43,9 @@ Run the next command
 
 You can validate the next naming conventions for methods, classes, variables and symbols:
 
-- only ascii characters for identifiers
-- snake case identifiers
-- camel case identifiers
+- [ascii-only characters for identifiers](https://rubystyle.guide/#english-identifiers)
+- [snake case identifiers](https://rubystyle.guide/#snake-case-symbols-methods-vars)
+- [camel case identifiers](https://rubystyle.guide/#camelcase-classes)
 
 ### ***config.yml*** file
 The default configuration to validate the conventions is as follows:
@@ -65,15 +65,18 @@ The default configuration to validate the conventions is as follows:
     - :camelcase
 ```
 
-You can create your own ***config.yml*** file with your custome configuration and colocate it where you run the `ivancito` command
+You can create your own ***config.yml*** file with custome configurations and place it where you run the `ivancito` command
 
 ### `ivancito` command
 
-To run the linter open the terminal and go to that directory where you have the `file.rb` you'd like to validate, create the ***config.yml*** and put it there if you'd like a custom configuration. Finally run the command as the next example.
+To run the linter open the terminal and go to that directory where you have the `file.rb` you'd like to validate, create the ***config.yml*** and put it there if you'd like a custom configuration. Finally, run the command as follows:
 
     $ ivancito file.rb
 
 ### example 
+
+Here I use ivancito linter to validate [test_script](/spec/test/test_script)
+
 ```
 $ ivancito test_script 
 classes
@@ -95,7 +98,7 @@ symbols
          someSymbol line 9 column 3
 $
 ```
-In case the linter detects invalid identifiers, it'll let you know the line and the column where they are positioning.
+In case the linter detects invalid identifiers, it'll let you know the line and the column where they are placed
 
 ## Authors
 
