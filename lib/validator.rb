@@ -8,6 +8,9 @@ class Validator
   def validate(element, validation)
     elements = @code.send(element)
 
+    validation = "#{validation}_#{element}" if validation == :snakecase &&
+                                               element == :variables
+
     send(validation, elements)
   end
 
@@ -22,6 +25,12 @@ class Validator
   end
 
   def snakecase(elements)
+    elements.reject do |element|
+      element[0] == to_snakecase(element[0])
+    end
+  end
+
+  def snakecase_variables(elements)
     elements.reject do |element|
       element[0] == to_snakecase(element[0]) || element[0] == to_snakecase(element[0]).upcase
     end
