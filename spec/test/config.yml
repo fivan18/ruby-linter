@@ -1,0 +1,14 @@
+---
+  :classes:
+    - :ascii
+    - :camelcase
+  :variables:
+    - :ascii
+    - :snakecase
+  :methods:
+    - :ascii
+    - :snakecase
+  :symbols:
+    - :ascii
+    - :snakecase
+
